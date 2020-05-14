@@ -215,15 +215,6 @@
 	/*
 	* Load the app
 	*/
-	ready(function() {
-		if( ! document.getElementById('vizualizer-module')) return;
-		devLogger('App ready');
-		loadCut(currentCut + '-' + currentColor).then(function() {
-			vizualizer.init('vizualizer-animator-images');
-		});
-		handleEngraveForm();
-		handleCutChange();
-		handleColorChange();
-	});
+	
 
 })();
