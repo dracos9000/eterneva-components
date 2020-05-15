@@ -414,8 +414,8 @@
 <section class="section" id="vizualizer-module">
 	<div class="vizualizer-container">
 		<div class="vizualizer-col">
-			<h2 class="dark-text">{{ page.visualizer.header | default: 'A diamond that is uniquely them' }}</h2>
-			<p class="dark-text">{{ page.visualizer.paragraph | default: 'Design a diamond that uniquely tells your loved one’s story. Choose a color that reminds you of their eyes or that represents their one-in-a-million personality. As the final touch, we’ll engrave their name on the diamond’s edge.' }}</p>
+			<h2 class="dark-text">A diamond that is uniquely them</h2>
+			<p class="dark-text">Design a diamond that uniquely tells your loved one’s story. Choose a color that reminds you of their eyes or that represents their one-in-a-million personality. As the final touch, we’ll engrave their name on the diamond’s edge.</p>
 		</div>
 		<div class="vizualizer-col">
 			<div id="vizualizer-cuts">
@@ -820,18 +820,12 @@
 		</div>
 		<div class="vizualizer-col">
 			<form id="vizualizer-name-form">
-				<label class="dark-text">{{ page.visualizer.engraveLabel | default: 'ENGRAVE THEIR NAME ON THE DIAMOND' }}</label>
-				<input type="text" placeholder="{{ page.visualizer.engravePlaceholder | default: 'Enter your loved one&#39;s name here' }}" id="vizualizer-engrave-name">
+				<label class="dark-text">ENGRAVE THEIR NAME ON THE DIAMOND</label>
+				<input type="text" placeholder="Enter your loved one&#39;s name here" id="vizualizer-engrave-name">
 				<button class="dark-text">VIEW<span> ON DIAMOND</span></button>
 			</form>
 			<a href="/lets-talk" class="btn">Begin the journey</a>
-			{% unless page.name == "pricing.html" %}
-			<div class="pricing-link has-text-centered-mobile">
-				<a class="dark-text" onclick="openPricingModal()">view pricing</a>
-			</div>
-			{% endunless %}
 		</div>
 	</div>
 </section>
 <script src="https://cdn.jsdelivr.net/gh/dracos9000/eterneva-components@1.0.4/diamondVisualizer.min.js"></script>
-
