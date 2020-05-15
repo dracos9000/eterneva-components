@@ -1,10 +1,13 @@
 // Closure
-
+(function() {
 
 	let currentCut = 'asscher',
 		currentColor = 'colorless';
 
-	
+	function ready(fn) {
+		if (document.attachEvent ? document.readyState === 'complete' : document.readyState !== 'loading') fn();
+		else document.addEventListener('DOMContentLoaded', fn);
+	}
 
 	/*
 	* Dev logger
@@ -212,3 +215,15 @@
 	/*
 	* Load the app
 	*/
+	ready(function() {
+		if( ! document.getElementById('vizualizer-module')) return;
+		devLogger('App ready');
+		loadCut(currentCut + '-' + currentColor).then(function() {
+			vizualizer.init('vizualizer-animator-images');
+		});
+		handleEngraveForm();
+		handleCutChange();
+		handleColorChange();
+	});
+
+})();
