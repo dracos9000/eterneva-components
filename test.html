@@ -1,2 +1,414 @@
 
+<style>
+  #vizualizer-module {
+  font-size: 14px;
+  margin: 2em 0 0 0;
+  padding: 3rem 1.5rem 0 1.5rem;
+}
+#vizualizer-module .vizualizer-container {
+  margin: 0 auto;
+}
+#vizualizer-module .vizualizer-col {
+  position: relative;
+  margin-bottom: 2em;
+}
+#vizualizer-module .btn {
+  display: block;
+  width: 190px;
+  text-align: center;
+  background: #034ea2;
+  color: #fff;
+  font-size: 0.75em;
+  padding: 1em 1.6em;
+  letter-spacing: 0.125em;
+  border-radius: 4px;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin: 0 auto;
+}
+#vizualizer-module h2 {
+  font-size: 4em;
+  line-height: 1em;
+  margin: 0 0 0.5em 0;
+}
+#vizualizer-module p {
+  margin-top: 0;
+}
+#vizualizer-module form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 5em 0;
+}
+#vizualizer-module form label {
+  text-align: center;
+  font-family: bernina-sans-compressed-bold;
+  letter-spacing: 0.88px;
+  font-size: 0.875em;
+  flex: 1;
+  flex-basis: 100%;
+  margin-bottom: 1em;
+}
+#vizualizer-module form input[type="text"] {
+  color: #034ea2;
+  font-size: 0.85em;
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #c9c9c9;
+}
+#vizualizer-module form input[type="text"]:focus {
+  outline: none;
+  border-bottom: 1px solid #034ea2;
+}
+#vizualizer-module form input[type="text"]::placeholder {
+  color: #b8b8b8;
+}
+#vizualizer-module form button {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #034ea2;
+  font-family: zeitung-micro-pro-bold;
+  letter-spacing: 1px;
+  font-size: 0.625em;
+}
+#vizualizer-module form button span {
+  display: none;
+}
+#vizualizer-module form button:focus {
+  outline: none;
+}
+#vizualizer-module form input[type="text"], #vizualizer-module form button {
+  padding: 0.5em 0;
+}
+#vizualizer-module #vizualizer-cuts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-bottom: 2em;
+}
+#vizualizer-module #vizualizer-cuts a:hover {
+  color: #034ea2;
+}
+#vizualizer-module #vizualizer-cuts a img, #vizualizer-module #vizualizer-cuts a svg {
+  height: 40px;
+  margin: 0;
+}
+#vizualizer-module #vizualizer-cuts a svg {
+  fill: #000;
+  opacity: 0.4;
+  transform: scale(0.9);
+  transition: opacity 0.4s ease-out, fill 0.4s ease-out, transform 0.2s ease-out;
+}
+#vizualizer-module #vizualizer-cuts a:hover svg, #vizualizer-module #vizualizer-cuts a.selected svg {
+  fill: #034ea2;
+  opacity: 1;
+  transform: scale(1);
+}
+#vizualizer-module #vizualizer-animator {
+  position: relative;
+  user-select: none;
+  cursor: ew-resize;
+  overflow: hidden;
+}
+#vizualizer-module #vizualizer-animator #vizualizer-animator-images {
+  min-height: 400px;
+  position: relative;
+  z-index: 2;
+  margin-top: -4em;
+  transform: scale(1);
+  opacity: 1;
+  transition: all 400ms cubic-bezier(0.04, 0.9, 0.77, 0.95);
+  transform-origin: center;
+}
+#vizualizer-module #vizualizer-animator #vizualizer-animator-images.zoomed {
+  transform: scale(1.4);
+  opacity: 0;
+}
+#vizualizer-module #vizualizer-animator #vizualizer-animator-images img {
+  pointer-events: none;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#vizualizer-module #vizualizer-animator #vizualizer-animator-images img:first-child {
+  position: relative;
+}
+#vizualizer-module #vizualizer-animator #vizualizer-animator-images img {
+  opacity: 0;
+ /*transition: opacity 80ms linear;
+ */
+}
+#vizualizer-module #vizualizer-animator #vizualizer-animator-images img.active {
+  opacity: 1;
+}
+#vizualizer-module #vizualizer-animator #vizualizer-360-path {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+#vizualizer-module #vizualizer-animator .vizualizer-dragger {
+  margin-bottom: 0;
+  color: #919191;
+  font-size: 0.9em;
+  letter-spacing: 0.08em;
+  text-align: center;
+  user-select: none;
+  cursor: ew-resize;
+}
+#vizualizer-module #vizualizer-animator .vizualizer-dragger span {
+  font-family: sans-serif;
+  margin: 0 1em;
+}
+#vizualizer-module #vizualizer-animator.loading .logo-animation {
+  display: block;
+}
+#vizualizer-module .vizualizer-note {
+  font-family: zeitung-micro-pro-bold;
+  text-align: center;
+  position: relative;
+  z-index: 3;
+  font-size: 1.5em;
+  margin-bottom: 2em;
+}
+#vizualizer-module .vizualizer-note span {
+  font-family: northwell-alt;
+  font-size: 2em;
+}
+#vizualizer-module #vizualizer-color-options {
+  margin: 2em 0;
+  text-align: center;
+}
+#vizualizer-module #vizualizer-color-options .option {
+  position: relative;
+  display: inline-block;
+  margin: 0 0.4em;
+}
+#vizualizer-module #vizualizer-color-options .option span {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 27px;
+  overflow: hidden;
+  text-indent: -999px;
+}
+#vizualizer-module #vizualizer-color-options .option::before {
+  content: '';
+  display: block;
+  background: #034ea2;
+  width: 6px;
+  height: 6px;
+  border-radius: 15px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  transition: top 0.15s ease-out;
+}
+#vizualizer-module #vizualizer-color-options .option.selected::before {
+  top: 120%;
+}
+#vizualizer-module #vizualizer-color-options .option[data-color="red"] span {
+  background-color: #dc2b2b;
+  border: 0.8px solid #dc2b2b;
+}
+#vizualizer-module #vizualizer-color-options .option[data-color="yellow"] span {
+  background-color: #fff059;
+  border: 0.8px solid #fff059;
+}
+#vizualizer-module #vizualizer-color-options .option[data-color="green"] span {
+  background-color: #62975a;
+  border: 0.8px solid #62975a;
+}
+#vizualizer-module #vizualizer-color-options .option[data-color="blue"] span {
+  background-color: #89c8ff;
+  border: 0.8px solid #89c8ff;
+}
+#vizualizer-module #vizualizer-color-options .option[data-color="colorless"] span {
+  background-color: #fff;
+  border: 0.8px solid #424242;
+}
+#vizualizer-module #vizualizer-color-options .option[data-color="black"] span {
+  background-color: #2a2a2a;
+  border: 0.8px solid #2a2a2a;
+}
+#vizualizer-module #vizualizer-zoom {
+  position: absolute;
+  left: -2em;
+  right: -2em;
+  top: 8em;
+  bottom: -1em;
+  z-index: 3;
+  background-size: cover;
+  background-position: center;
+ /*display: flex;
+ */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-image: url(https://res.cloudinary.com/etnva/image/upload/v1569558875/diamond-visualizer/zoomed/zoomed-black-diamond.jpg);
+  display: none;
+  transform: scale(0.4);
+  opacity: 0;
+  transition: all 100ms cubic-bezier(0.04, 0.9, 0.77, 0.95);
+}
+#vizualizer-module #vizualizer-zoom.active {
+  transform: scale(1);
+  opacity: 1;
+}
+#vizualizer-module #vizualizer-zoom-name {
+  pointer-events: none;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  font-family: zeitung-micro-pro-bold;
+  letter-spacing: 2px;
+  transform: translateY(-1em);
+}
+#vizualizer-module .vizualizer-zoom-close {
+  position: absolute;
+  left: 0;
+  top: 1em;
+  display: block;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  text-indent: -999px;
+}
+#vizualizer-module .vizualizer-zoom-close::after, #vizualizer-module .vizualizer-zoom-close::before {
+  display: block;
+  content: '';
+  width: 2px;
+  height: 30px;
+  background: #fff;
+  transform: rotate(-45deg);
+  transform-origin: center;
+  position: absolute;
+  left: 50%;
+  top: 0;
+}
+#vizualizer-module .vizualizer-zoom-close::before {
+  transform: rotate(45deg);
+}
+#vizualizer-module .vizualizer-zoom-close:hover::before, #vizualizer-module .vizualizer-zoom-close:hover::after {
+  background: #fff;
+}
+#vizualizer-module .logo-animation {
+  margin: 2em auto;
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+#vizualizer-module .logo-animation svg {
+  margin: 5em auto;
+  display: block;
+  -webkit-filter: drop-shadow(0px 0px 2px rgba(3, 78, 162, .7));
+  filter: drop-shadow(0px 0px 2px rgba(3, 78, 162, .7));
+}
+#vizualizer-module #Logo-circle path {
+  fill: none;
+  stroke: #034ea2;
+  stroke-width: 1px;
+  stroke-dasharray: 150;
+  stroke-dashoffset: 500;
+  animation: dash 3s linear alternate infinite;
+}
+@keyframes dash {
+  from {
+    stroke-dashoffset: 500;
+ }
+  to {
+    stroke-dashoffset: 0;
+ }
+}
+@media (min-width: 768px) {
+  #vizualizer-module {
+    font-size: 16px;
+    margin: 5.2em 0 0;
+ }
+  #vizualizer-module .vizualizer-container {
+    max-width: 1050px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: column wrap;
+    height: 800px;
+ }
+  #vizualizer-module .vizualizer-col {
+    padding: 0 1em;
+    width: 50%;
+    flex: 1 1 1;
+ }
+  #vizualizer-module .vizualizer-col:nth-child(2) {
+    order: 3;
+ }
+  #vizualizer-module .vizualizer-col:nth-child(3) {
+    order: 2;
+ }
+  #vizualizer-module h2 {
+    font-size: 5.625em;
+ }
+  #vizualizer-module form {
+    margin: 0 2em 5em 0;
+ }
+  #vizualizer-module form input[type="text"] {
+    font-size: 1em;
+ }
+  #vizualizer-module form label {
+    text-align: left;
+ }
+  #vizualizer-module form button {
+    margin: 0;
+ }
+  #vizualizer-module form button span {
+    display: inline;
+ }
+  #vizualizer-module .btn {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+ }
+  #vizualizer-module #vizualizer-cuts a img {
+    height: 44px;
+    margin: 0 1em;
+ }
+  #vizualizer-module #vizualizer-color-options .option {
+    display: inline-block;
+    width: 27px;
+    height: 27px;
+    margin: 0 1em;
+ }
+  #vizualizer-module #vizualizer-animator #vizualizer-animator-images {
+    margin-top: -7.4em;
+ }
+  #vizualizer-module #vizualizer-zoom {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 8px;
+ }
+  #vizualizer-module #vizualizer-zoom-name {
+    transform: translateY(-0.5em);
+ }
+}
+#vizualizer-module .pricing-link {
+  margin-left: 20px;
+  display: inline;
+}
+@media (min-width: 480px) {
+  #vizualizer-module .pricing-link {
+    display: block;
+    margin: 20px 0 0 0;
+ }
+}
+</style>
 <p>This is a test!</p>
